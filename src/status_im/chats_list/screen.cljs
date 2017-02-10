@@ -68,6 +68,14 @@
    [linear-gradient {:style  {:height 3}
                      :colors st/gradient-top-bottom-shadow}]])
 
+(defn render-separator-fn [chats]
+  (fn [_ row-id _]
+    (list-item
+     (when (< row-id (- (count chats) 1))
+       ^{:key (str "separator-" row-id)}
+       [view st/chat-separator-wrapper
+        [view st/chat-separator-item]]))))
+
 (defview chats-list []
   [chats [:get :chats]]
   [view st/chats-container
@@ -76,11 +84,8 @@
                :renderRow       (fn [[id :as row] _ _]
                                   (list-item ^{:key id} [chat-list-item row]))
                :renderFooter    #(list-item [chat-shadow-item])
-               :renderSeparator #(list-item
-                                   (when (< %2 (- (count chats) 1))
-                                     ^{:key (str "separator-" %2)}
-                                     [view st/chat-separator-wrapper
-                                      [view st/chat-separator-item]]))
+               :renderSeparator (when (get-in platform-specific [:chats :render-separator?])
+                                  (render-separator-fn chats))
                :style           st/list-container}]
    (when (get-in platform-specific [:chats :action-button?])
      [chats-action-button])

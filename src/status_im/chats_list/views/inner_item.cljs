@@ -40,12 +40,11 @@
 
 (defn message-content-text [message]
   (let [content (message-content message)]
-    (if (str/blank? content)
-      [text {:style st/last-message-text-no-messages}
-       (label :t/no-messages)]
-      [text {:style           st/last-message-text
-             :number-of-lines 2}
-       content])))
+    [text {:style           st/last-message-text
+           :number-of-lines 1}
+     (if (str/blank? content)
+       (label :t/no-messages)
+       content)]))
 
 (defview message-status [{:keys [chat-id contacts]}
                          {:keys [message-id message-status user-statuses message-type outgoing] :as msg}]
@@ -99,14 +98,10 @@
        (let [chat-name (if (str/blank? name)
                          (generate-gfy)
                          (truncate-str name 30))]
-         [text {:style st/name-text
-                :font  :medium}
+         [text {:style st/name-text}
           (if public-group?
             (str "#" chat-name)
-            chat-name)])
-       #_(when private-group?
-         [text {:style st/memebers-text}
-          (label-pluralize (inc (count contacts)) :t/members)])]
+            chat-name)])]
       [message-content-text last-message]]
      [view
       (when last-message

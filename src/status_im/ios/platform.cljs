@@ -20,6 +20,17 @@
                            :additional-height 5}
    :actions-list-view     {:border-bottom-color styles/color-gray3
                            :border-bottom-width 0.5}
+   :chat-list             {:chat-container               {:height 74}
+                           :item-container               {:padding-top 14}
+                           :chat-name                    {:height 20}
+                           :last-message                 {:margin-top 6
+                                                          :font-size  15
+                                                          :height     20}
+                           :last-message-timestamp       {:font-size 15}
+                           :unread-count-container       {:top 38}
+                           :unread-count                 {:top 3}
+                           :public-group-icon-container  {:margin-top 2}
+                           :private-group-icon-container {:margin-top 2}}
    :chat                  {:new-message {:border-top-color styles/color-gray3
                                          :border-top-width 0.5}}
    :discover             {:subtitle  {:color          styles/color-steel
@@ -95,13 +106,11 @@
    :list-selection-fn            show-action-sheet
    :tabs                         {:tab-shadows? false}
    :chats                        {:action-button?       false
-                                  :new-chat-in-toolbar? true}
+                                  :new-chat-in-toolbar? true
+                                  :render-separator?    true}
    :contacts                     {:action-button?          false
                                   :new-contact-in-toolbar? true
                                   :uppercase-subtitles?    true
                                   :group-block-shadows?    false}
    :discover                     {:uppercase-subtitles? true}
-   :public-group-icon-container  {:margin-top 2}
-   :private-group-icon-container {:margin-top 2}
    :public-group-chat-hash-style {:top 6 :left 3}})
-
