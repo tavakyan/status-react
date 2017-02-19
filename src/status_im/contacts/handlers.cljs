@@ -46,6 +46,13 @@
       (assoc-in [:toolbar-search :show] nil)
       (assoc :contacts-click-handler click-handler)))
 
+(defmethod nav/preload-data! :reorder-groups
+  [db [_ _]]
+  (assoc db :groups-order (->> (vals (:contact-groups db))
+                               (remove :pending?)
+                               (sort-by :order >)
+                               (map :group-id))))
+
 (register-handler :remove-contacts-click-handler
   (fn [db]
     (dissoc db

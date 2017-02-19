@@ -8,6 +8,9 @@
                            :main        {:height    0
                                          :bar-style "dark-content"
                                          :color     styles/color-white}
+                           :gray        {:height    0
+                                         :bar-style "dark-content"
+                                         :color     styles/color-light-gray}
                            :transparent {:height       20
                                          :bar-style    "light-content"
                                          :translucent? true
@@ -44,6 +47,17 @@
                                           :height          56
                                           :padding-top     10
                                           :backgroundColor styles/color-light-gray}}
+   :reorder-groups        {:order-item-container     {:height           56
+                                                      :background-color styles/color-white}
+                           :order-item-icon          {:padding-right 16}
+                           :order-item-label         {:padding-left   16
+                                                      :font-size      16
+                                                      :color          styles/color-black
+                                                      :line-height    24}
+                           :toolbar-view             {:background-color styles/color-light-gray}}
+   :confirm-button-label  {:color          styles/color-white
+                           :font-size      14
+                           :letter-spacing 0.5}
    :bottom-gradient       {:height 3}
    :input-label           {:left 4}
    :input-error-text      {:margin-left 4}

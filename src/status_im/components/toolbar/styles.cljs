@@ -52,7 +52,7 @@
 (def toolbar-title-text
   {:margin-top 0
    :color      text1-color
-   :font-size  16})
+   :font-size  17})
 
 (defn toolbar-actions-container [actions-count custom]
   (merge {:flex-direction "row"
@@ -68,6 +68,10 @@
    :justify-content :center})
 
 (def toolbar-with-search
+  {:background-color toolbar-background1
+   :elevation        0})
+
+(def toolbar-inner
   {:background-color toolbar-background1
    :elevation        0})
 

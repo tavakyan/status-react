@@ -55,6 +55,18 @@
                                           :margin-top      24
                                           :height          53
                                           :backgroundColor styles/color-white}}
+   :reorder-groups        {:order-item-separator     {:margin-left      16
+                                                      :opacity          0.5}
+                           :order-item-container     {:height 64}
+                           :order-item-icon          {:padding-right 20}
+                           :order-item-label         {:padding-left   16
+                                                      :font-size      17
+                                                      :line-height    20
+                                                      :letter-spacing -0.2}}
+   :confirm-button-label  {:color          styles/color-white
+                           :font-size      17
+                           :line-height    20
+                           :letter-spacing -0.2}
    :bottom-gradient       {:height 1}
    :input-label           {:left 0}
    :input-error-text      {:margin-left 0}

@@ -5,9 +5,14 @@
                                                  text2-color
                                                  color-light-blue
                                                  color-light-red
+                                                 color-light-gray
                                                  selected-contact-color
-                                                 color-gray4]]
+                                                 color-gray4
+                                                 color-gray5]]
             [status-im.utils.platform :refer [platform-specific]]))
+
+(defn ps-reorder [item]
+  (get-in platform-specific [:component-styles :reorder-groups item]))
 
 (defn toolbar-icon [enabled?]
   {:width   20
@@ -18,6 +23,11 @@
   {:flex             1
    :flex-direction   :column
    :background-color color-white})
+
+(def reorder-groups-container
+  {:flex             1
+   :flex-direction   :column
+   :background-color color-light-gray})
 
 (def chat-name-container
   {:margin-left 16})
@@ -90,6 +100,9 @@
 (def contacts-list
   {:background-color :white})
 
+(def reorder-groups-list
+  {:background-color :white})
+
 (def contact-container
   {:flex-direction  :row
    :justify-content :center
@@ -118,3 +131,27 @@
   {:height       56
    :padding-left 72
    :margin-top   15})
+
+(def order-item-container
+  {:background-color color-white})
+
+(def order-item-inner-container
+  (merge {:flex-direction :row
+          :align-items    :center}
+         (ps-reorder :order-item-container)))
+
+(def order-item-label
+  (ps-reorder :order-item-label))
+
+(def order-item-icon
+  (ps-reorder :order-item-icon))
+
+(def order-item-separator
+  (merge {:height           1
+          :background-color color-gray5}
+         (ps-reorder :order-item-separator)))
+
+(def toolbar-view
+  (ps-reorder :toolbar-view))
+
+

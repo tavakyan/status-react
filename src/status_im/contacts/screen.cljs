@@ -31,9 +31,10 @@
 (def contacts-limit 5)
 
 (def toolbar-options
-  [{:text (label :t/new-contact) :value #(dispatch [:navigate-to :new-contact])}
-   {:text (label :t/edit)        :value #(dispatch [:set-in [:contacts-ui-props :edit?] true])}
-   {:text (label :t/new-group)   :value #(dispatch [:open-contact-group-list])}])
+  [{:text (label :t/new-contact)    :value #(dispatch [:navigate-to :new-contact])}
+   {:text (label :t/edit)           :value #(dispatch [:set-in [:contacts-ui-props :edit?] true])}
+   {:text (label :t/new-group)      :value #(dispatch [:open-contact-group-list])}
+   {:text (label :t/reorder-groups) :value #(dispatch [:navigate-to :reorder-groups])}])
 
 (defn toolbar-actions []
   (let [new-contact? (get-in platform-specific [:contacts :new-contact-in-toolbar?])]
@@ -48,13 +49,13 @@
        (if new-contact? toolbar-options (rest toolbar-options))]]]))
 
 (defn toolbar-view []
- [toolbar {:style          tst/toolbar-with-search
+ [toolbar {:style          tst/toolbar-inner
            :title          (label :t/contacts)
            :nav-action     (act/hamburger open-drawer)
            :custom-action  (toolbar-actions)}])
 
 (defn toolbar-edit []
-  [toolbar {:style          tst/toolbar-with-search
+  [toolbar {:style          tst/toolbar-inner
             :nav-action     (act/back #(dispatch [:set-in [:contacts-ui-props :edit?] false]))
             :title          (label :t/edit-contacts)}])
 

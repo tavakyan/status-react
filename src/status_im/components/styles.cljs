@@ -96,12 +96,6 @@
    :align-items      :center
    :background-color color-light-blue})
 
-(def confirm-button-label
-  {:color          color-white
-   :font-size      17
-   :line-height    20
-   :letter-spacing -0.2})
-
 (def context-menu
   {:customStyles {:optionsContainer {:padding-top 8
                                      :padding-bottom 8}
