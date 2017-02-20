@@ -22,7 +22,7 @@
                            :chat-name                    {:height 24}
                            :last-message                 {:margin-top 4
                                                           :font-size  14
-                                                          :height     16}
+                                                          :height     20}
                            :last-message-timestamp       {:font-size 14}
                            :unread-count-container       {:top 45}
                            :unread-count                 {:top 2}
