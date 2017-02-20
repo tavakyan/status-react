@@ -218,8 +218,7 @@
   (-> (fn [db [_ new-group]]
           (assoc db :new-group new-group))
       ((enrich update-group))
-      ((after update-group!))
-      ((after show-contact-list!))))
+      ((after update-group!))))
 
 (defn save-groups! [{:keys [new-groups]} _]
   (groups/save-all new-groups))

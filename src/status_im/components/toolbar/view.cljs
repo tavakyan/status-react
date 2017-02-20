@@ -9,6 +9,7 @@
             [status-im.components.sync-state.gradient :refer [sync-state-gradient-view]]
             [status-im.components.styles :refer [icon-default
                                                  icon-search]]
+            [status-im.components.context-menu :refer [context-menu]]
             [status-im.components.toolbar.actions :as act]
             [status-im.components.toolbar.styles :as st]
             [status-im.accessibility-ids :as id]
@@ -44,11 +45,18 @@
       [view (st/toolbar-actions-container (count actions) custom-action)
        (if actions
          (for [{action-image   :image
+                action-options :options
                 action-handler :handler} actions]
-           ^{:key (str "action-" action-image)}
-           [touchable-highlight {:on-press action-handler}
-            [view st/toolbar-action
-             [image action-image]]])
+           (with-meta
+             (if action-options
+               [context-menu
+                [view st/toolbar-action
+                 [image action-image]]
+                action-options]
+               [touchable-highlight {:on-press action-handler}
+                [view st/toolbar-action
+                 [image action-image]]])
+             {:key (str "action-" action-image)}))
          custom-action)]]
      [sync-state-gradient-view]
      [view st/toolbar-line]]))

@@ -121,7 +121,9 @@
                          :extended?     true}]))
        :style      st/contacts-list}]
      (when group
-       [delete-btn #(dispatch [:update-group (assoc group :pending? true)])])
+       [delete-btn #(do
+                      (dispatch [:update-group (assoc group :pending? true)])
+                      (dispatch [:navigate-to-clean :contact-list]))])
      (when save-btn-enabled?
        [confirm-button (label :t/save) (if group
                                          #(dispatch [:update-group-after-edit group group-name])

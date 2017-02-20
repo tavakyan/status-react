@@ -15,10 +15,10 @@
              :style  st/action-default}
    :handler handler})
 
-(defn opts [handler]
+(defn opts [options]
   {:image   {:source {:uri :icon_options_dark}
              :style  st/action-default}
-   :handler handler})
+   :options options})
 
 (defn search [handler]
   {:image   {:source {:uri :icon_search_dark}
