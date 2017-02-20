@@ -63,9 +63,13 @@
      :onPress     #(dispatch [:navigate-to :new-public-group])}
     [icon :public_group_big st/group-icon]]])
 
+(defn chat-list-padding []
+  [view {:height 8 :background-color :white}])
+
 (defn chat-shadow-item []
-  [view {:height 3}
-   [linear-gradient {:style  {:height 3}
+  [view {:height 12}
+   [chat-list-padding]
+   [linear-gradient {:style  {:height 4}
                      :colors st/gradient-top-bottom-shadow}]])
 
 (defn render-separator-fn [chats]
@@ -83,6 +87,7 @@
    [list-view {:dataSource      (to-datasource chats)
                :renderRow       (fn [[id :as row] _ _]
                                   (list-item ^{:key id} [chat-list-item row]))
+               :renderHeader    #(list-item [chat-list-padding])
                :renderFooter    #(list-item [chat-shadow-item])
                :renderSeparator (when (get-in platform-specific [:chats :render-separator?])
                                   (render-separator-fn chats))
