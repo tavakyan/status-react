@@ -13,9 +13,7 @@
             [status-im.utils.platform :as p]))
 
 (defn toolbar [chats-scrolled?]
-  (merge {:background-color (if chats-scrolled?
-                              toolbar-background1
-                              toolbar-background2)}
+  (merge {:background-color toolbar-background1}
          (get-in p/platform-specific [:component-styles :toolbar])))
 
 (def gradient-top-bottom-shadow
