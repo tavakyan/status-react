@@ -30,7 +30,7 @@
   [chats-scrolled? [:get :chats-scrolled?]]
   (let [new-chat? (get-in platform-specific [:chats :new-chat-in-toolbar?])
         actions   (if new-chat?
-                    [(act/add #(dispatch [:navigate-to :group-contacts :people]))])]
+                    [(act/opts #(dispatch [:navigate-to :group-contacts :people]))])]
     [toolbar-with-search
      {:show-search?       false
       :search-key         :chat-list
@@ -45,23 +45,8 @@
                   :offset-x     16
                   :offset-y     22
                   :hide-shadow  true
-                  :spacing      13}
-   [action-button-item
-    {:title       (label :t/new-chat)
-     :buttonColor :#9b59b6
-     :onPress     #(dispatch [:navigate-to :group-contacts :people])}
-    [ion-icon {:name  :md-create
-               :style st/create-icon}]]
-   [action-button-item
-    {:title       (label :t/new-group-chat)
-     :buttonColor :#1abc9c
-     :onPress     #(dispatch [:navigate-to :new-group])}
-    [icon :private_group_big st/group-icon]]
-   [action-button-item
-    {:title       (label :t/new-public-group-chat)
-     :buttonColor :#1abc9c
-     :onPress     #(dispatch [:navigate-to :new-public-group])}
-    [icon :public_group_big st/group-icon]]])
+                  :spacing      13
+                  :on-press     #(dispatch [:navigate-to :group-contacts :people])}])
 
 (defn chat-list-padding []
   [view {:height 8 :background-color :white}])
