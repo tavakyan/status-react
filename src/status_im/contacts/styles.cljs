@@ -2,14 +2,30 @@
   (:require [status-im.components.styles :refer [text1-color
                                                  text2-color
                                                  text3-color
+                                                 text4-color
                                                  separator-color
                                                  color-white
+                                                 color-light-gray
                                                  color-gray2
                                                  color-gray]]
             [status-im.components.toolbar.styles :refer [toolbar-background1 toolbar-background2]]
             [status-im.utils.platform :as p]))
 
 ;; Contacts list
+
+(def list-bottom-shadow
+  ["rgba(24, 52, 76, 0.165)"
+   "rgba(24, 52, 76, 0.03)"
+   "rgba(24, 52, 76, 0.01)"])
+
+(def list-top-shadow
+  ["rgba(24, 52, 76, 0.01)"
+   "rgba(24, 52, 76, 0.03)"])
+
+(def new-chat-options
+  {:padding-top      8
+   :padding-bottom   8
+   :background-color color-white})
 
 (def toolbar-shadow
   {:height           2
@@ -23,8 +39,8 @@
    :background-color toolbar-background2})
 
 (def contacts-list-container
-  (merge (get-in p/platform-specific [:component-styles :main-tab-list])
-         {:flex 1}))
+  {:flex          1
+   :margin-bottom 10})
 
 (def empty-contact-groups
   (merge contact-groups
@@ -41,7 +57,7 @@
    :color      color-gray2})
 
 (def contacts-list
-  {:backgroundColor color-white})
+  {:backgroundColor color-light-gray})
 
 (def contact-group
   {:flex-direction :column})
@@ -72,6 +88,16 @@
 (def contact-group-header-gradient-bottom-colors
   ["rgba(24, 52, 76, 0.01)"
    "rgba(24, 52, 76, 0.05)"])
+
+(def contact-list-title-container
+  {:background-color color-light-gray
+   :padding-top      20
+   :padding-bottom   20
+   :padding-left     16})
+
+(def contact-list-title
+  {:font-size 14
+   :color     text4-color})
 
 (def show-all
   {:flexDirection   :row
@@ -108,11 +134,10 @@
 
 (def option-inner-container
   {:flex                1
+
    :flex-direction      :row
-   :height              56
-   :background-color    color-white
-   :border-bottom-color separator-color
-   :border-bottom-width 0.5})
+   :height              52
+   :background-color    color-white})
 
 (def option-inner
   {:width       48
@@ -123,12 +148,11 @@
 (def option-inner-image
   {:width  24
    :height 18
-   :top    16
-   :left   13})
+   :top    14
+   :left   4})
 
 (def group-icon
-  (assoc option-inner-image
-    :tint-color color-gray))
+  option-inner-image)
 
 (def spacing-top
   {:background-color color-white
@@ -152,7 +176,7 @@
    :justifyContent :center})
 
 (def name-text
-  {:fontSize 15
+  {:fontSize 16
    :color    text1-color})
 
 (def info-text

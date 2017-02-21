@@ -2,6 +2,7 @@
   (:require-macros [status-im.utils.views :refer [defview]])
   (:require [re-frame.core :refer [subscribe dispatch dispatch-sync]]
             [status-im.components.react :refer [view text
+                                                linear-gradient
                                                 image
                                                 touchable-highlight
                                                 list-view
@@ -19,28 +20,48 @@
             [status-im.i18n :refer [label]]
             [status-im.utils.platform :refer [platform-specific]]))
 
+(defn list-bottom-shadow []
+  [linear-gradient {:style  {:height 4}
+                    :colors st/list-bottom-shadow}])
+
+(defn list-top-shadow []
+  [linear-gradient {:style  {:height 3}
+                    :colors st/list-top-shadow}])
+
 (defn new-group-chat-view []
   [view
-   [touchable-highlight
-    {:on-press #(dispatch [:navigate-to :new-group])}
-    [view st/contact-container
-     [view st/option-inner-container
-      [view st/option-inner
-       [image {:source {:uri :icon_private_group_big}
-               :style  st/group-icon}]]
-      [view st/info-container
-       [text {:style st/name-text}
-        (label :t/new-group-chat)]]]]]
-   [touchable-highlight
-    {:on-press #(dispatch [:navigate-to :new-public-group])}
-    [view st/contact-container
-     [view st/option-inner-container
-      [view st/option-inner
-       [image {:source {:uri :icon_public_group_big}
-               :style  st/group-icon}]]
-      [view st/info-container
-       [text {:style st/name-text}
-        (label :t/new-public-group-chat)]]]]]])
+   [view st/new-chat-options
+    [touchable-highlight
+     {:on-press #(dispatch [:navigate-to :new-group])}
+     [view st/contact-container
+      [view st/option-inner-container
+       [view st/option-inner
+        [image {:source {:uri :icon_private_group_big}
+                :style  st/group-icon}]]
+       [view st/info-container
+        [text {:style st/name-text}
+         (label :t/new-group-chat)]]]]]
+    [touchable-highlight
+     {:on-press #(dispatch [:navigate-to :new-public-group])}
+     [view st/contact-container
+      [view st/option-inner-container
+       [view st/option-inner
+        [image {:source {:uri :icon_public_group_big}
+                :style  st/group-icon}]]
+       [view st/info-container
+        [text {:style st/name-text}
+         (label :t/new-public-group-chat)]]]]]
+    [touchable-highlight
+     {:on-press #(dispatch [:navigate-to :new-contact])}
+     [view st/contact-container
+      [view st/option-inner-container
+       [view st/option-inner
+        [image {:source {:uri :icon_add_blue}
+                :style  st/group-icon}]]
+       [view st/info-container
+        [text {:style st/name-text}
+         (label :t/add-new-contact)]]]]]]
+   [list-bottom-shadow]])
 
 (defn render-row [chat-modal click-handler action params]
   (fn [row _ _]
@@ -62,6 +83,14 @@
       [text {:style           st/name-text
              :number-of-lines 1}
        label]]]]])
+
+(defn contact-list-title []
+  [view
+   [view st/contact-list-title-container
+    [text {:style st/contact-list-title
+           :font  :medium}
+     (label :t/choose-from-contacts)]]
+   [list-top-shadow]])
 
 (defview contact-list-toolbar []
   [group       [:get :contacts-group]
@@ -92,8 +121,9 @@
                   :keyboardShouldPersistTaps true
                   :renderHeader              #(list-item
                                                 [view
-                                                 (if show-new-group-chat?
+                                                 (when show-new-group-chat?
                                                    [new-group-chat-view])
+                                                 [contact-list-title]
                                                  [view st/spacing-top]])
                   :renderFooter              #(list-item [view st/spacing-bottom])
                   :style                     st/contacts-list}])))
